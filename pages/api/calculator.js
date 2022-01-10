@@ -6,8 +6,7 @@ export default async function handler(req, res) {
 
     try {
         const websiteCarbonCalculator = new WebsiteCarbonCalculator({
-            // pagespeedApiKey: process.env.PAGE_SPEED_API_KEY,
-            pagespeedApiKey: 'AIzaSyDwVIfbUFTCsMgUFfSOsnrlvDuBNZDEM7k',
+            pagespeedApiKey: process.env.PAGE_SPEED_API_KEY,
         });
 
         result = await websiteCarbonCalculator.calculateByURL(websiteUrl);
