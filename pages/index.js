@@ -4,23 +4,30 @@ import { useState } from 'react';
 export default function Home(props) {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const [error, setError] = useState(false);
 
   const calculateCarbon = async event => {
     event.preventDefault();
 
-    console.log();
     setLoading(true);
+    setError(false);
 
     const url = 'api/calculator';
     const params = new URLSearchParams({ website: event.target.website.value }).toString();
 
     const urlWithWebsite = url + '?' + params;
 
-    const res = await fetch(urlWithWebsite);
-    const result = await res.json();
+    try {
+      const res = await fetch(urlWithWebsite);
+      const result = await res.json();
 
-    setLoading(false);
-    setResult(result);
+      setLoading(false);
+      setResult(result);
+    } catch (e) {
+      console.log(e)
+      setLoading(false);
+      setError(true);
+    }
   }
 
   const parseResult = co2PerPageView => {
@@ -45,6 +52,8 @@ export default function Home(props) {
         </form>
 
         {loading && 'Loading...'}
+
+        {error && 'Wystąpił błąd.'}
 
         {result && (
           <>
