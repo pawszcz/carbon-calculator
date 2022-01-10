@@ -6,14 +6,15 @@ export default async function handler(req, res) {
 
     try {
         const websiteCarbonCalculator = new WebsiteCarbonCalculator({
-            pagespeedApiKey: process.env.PAGE_SPEED_API_KEY,
+            // pagespeedApiKey: process.env.PAGE_SPEED_API_KEY,
+            pagespeedApiKey: 'AIzaSyDwVIfbUFTCsMgUFfSOsnrlvDuBNZDEM7k',
         });
 
         result = await websiteCarbonCalculator.calculateByURL(websiteUrl);
     } catch (error) {
         if (error instanceof WebsiteCarbonCalculatorError) {
             console.warn(error.message);
-            res.status(500).json({ error, api: process.env })
+            res.status(500).json({ error })
         }
     }
 
