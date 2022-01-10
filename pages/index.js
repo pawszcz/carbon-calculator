@@ -8,6 +8,7 @@ export default function Home(props) {
   const calculateCarbon = async event => {
     event.preventDefault();
 
+    console.log();
     setLoading(true);
 
     const url = 'api/calculator';
